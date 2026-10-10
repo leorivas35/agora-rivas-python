@@ -12,5 +12,6 @@ venv/
 .git/
 .gitignore
 .github/
-README.md
+docs/
 *.md
+!README.md
