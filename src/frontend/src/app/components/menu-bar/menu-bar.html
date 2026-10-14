@@ -1,0 +1,19 @@
+<header class="menu-bar">
+  <a class="brand" href="#home">{{ brand }}</a>
+
+  <button
+    type="button"
+    class="menu-toggle"
+    aria-label="Toggle navigation"
+    [attr.aria-expanded]="menuOpen()"
+    (click)="toggleMenu()"
+  >
+    ☰
+  </button>
+
+  <nav class="menu-links" [class.open]="menuOpen()">
+    @for (item of items; track item.href) {
+      <a [href]="item.href" (click)="closeMenu()">{{ item.label }}</a>
+    }
+  </nav>
+</header>

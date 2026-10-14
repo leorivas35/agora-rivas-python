@@ -1,14 +1,18 @@
-from fastapi import FastAPI
+import os
+import sys
 
-from agora_rivas.infrastructure.config.settings import get_settings
-from agora_rivas.interfaces.api.routes import router
+from django.core.management import execute_from_command_line
 
-settings = get_settings()
-app = FastAPI(title=settings.app_name, debug=settings.debug)
-app.include_router(router, prefix=settings.api_prefix)
+DEFAULT_SETTINGS_MODULE = "agora_rivas.infrastructure.config.settings"
+
+
+def main() -> None:
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", DEFAULT_SETTINGS_MODULE)
+    argv = list(sys.argv)
+    if len(argv) == 1:
+        argv += ["runserver", "0.0.0.0:8000"]
+    execute_from_command_line(argv)
 
 
 if __name__ == "__main__":
-    import uvicorn
-
-    uvicorn.run("agora_rivas.main:app", host="0.0.0.0", port=8000, reload=settings.debug)
+    main()

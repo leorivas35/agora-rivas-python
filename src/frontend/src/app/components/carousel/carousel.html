@@ -1,0 +1,25 @@
+<section class="carousel" aria-roledescription="carousel">
+  @for (slide of slides; track slide.title; let i = $index) {
+    @if (i === currentIndex()) {
+      <article class="slide" [style.background-color]="slide.color">
+        <h2>{{ slide.title }}</h2>
+        <p>{{ slide.description }}</p>
+      </article>
+    }
+  }
+
+  <button type="button" class="nav prev" aria-label="Previous slide" (click)="previous()">‹</button>
+  <button type="button" class="nav next" aria-label="Next slide" (click)="next()">›</button>
+
+  <div class="dots">
+    @for (slide of slides; track slide.title; let i = $index) {
+      <button
+        type="button"
+        class="dot"
+        [class.active]="i === currentIndex()"
+        [attr.aria-label]="'Go to slide ' + (i + 1)"
+        (click)="goTo(i)"
+      ></button>
+    }
+  </div>
+</section>

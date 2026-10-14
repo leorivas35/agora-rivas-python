@@ -7,16 +7,15 @@ name = "agora-rivas-python"
 version = "0.1.0"
 description = "Starter project skeleton for a Python application using Clean Architecture principles"
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.12"
 dependencies = [
-    "fastapi>=0.110.0",
-    "uvicorn>=0.29.0",
+    "Django>=6.1,<6.2",
 ]
 
 [project.optional-dependencies]
 dev = [
     "pytest>=8.0.0",
-    "httpx>=0.27.0",
+    "pytest-django>=4.8.0",
 ]
 
 [tool.setuptools]
@@ -24,3 +23,8 @@ package-dir = {"" = "src"}
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "agora_rivas.infrastructure.config.settings"
+pythonpath = ["src"]
+testpaths = ["tests"]
